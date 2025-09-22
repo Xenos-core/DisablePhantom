@@ -5,8 +5,8 @@ A simple modification for Minecraft servers to disable Phantoms. Created for the
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
-[![Telegram](https://img.shields.io/badge/Telegram-Join%20Channel-blue?logo=telegram)](YOUR_TELEGRAM_LINK)
-[![Discord](https://img.shields.io/badge/Discord-Join%20Server-blue?logo=discord)](YOUR_DISCORD_LINK)
+[![Telegram](https://img.shields.io/badge/Telegram-Join%20Channel-blue?logo=telegram)](@CatoniSefid)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-blue?logo=discord)](@CatoniSefid)
 
 ## Description
 
@@ -21,7 +21,7 @@ This project provides a straightforward solution to disable Phantom spawning on 
 
 ## Installation
 
-1.  Download the latest release of `DisablePhantom.jar` from the [Releases](https://github.com/YOUR_GITHUB_USERNAME/DisablePhantom/releases) page.
+1.  Download the latest release of `DisablePhantom.jar` from the [Releases](https://github.com/Xenos-core/DisablePhantom/releases) page.
 2.  Place the `.jar` file into the `plugins` folder of your Minecraft server.
 3.  Restart your Minecraft server.
 
@@ -33,8 +33,8 @@ This project provides a straightforward solution to disable Phantom spawning on 
 
 This modification is compatible with:
 
--   Minecraft Versions: `> Specify compatible Minecraft versions here (e.g., 1.18.x, 1.19.x, 1.20.x) <`
--   Server Platforms: Spigot, Paper
+-   Minecraft Versions: `> Specify compatible Minecraft versions here ( 1.21.x) <`
+-   Server Platforms: Spigot, Paper , purpur 
 
 ## Contribution Guidelines
 
@@ -56,7 +56,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Code of Conduct
 
 Please review and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) to maintain a welcoming and inclusive environment for all contributors.
-
----
-
-Maintained by `> YOUR_NAME_OR_ORGANIZATION <`
