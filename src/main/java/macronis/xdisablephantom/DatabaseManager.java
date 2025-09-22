@@ -12,12 +12,6 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Lightweight DB layer with a small in-memory cache for fast reads on main thread.
- * - Uses SQLite by default, supports MySQL if configured.
- * - Caches toggle states to avoid DB hits during spawn checks.
- * - Writes are performed asynchronously to avoid blocking the main thread.
- */
 public class DatabaseManager {
 
     private final JavaPlugin plugin;
@@ -74,23 +68,23 @@ public class DatabaseManager {
                 this.connection = DriverManager.getConnection(url, username, password);
             } else {
                 this.dbType = DbType.SQLITE;
-                // Ensure plugin data folder exists
+
                 File dataFolder = plugin.getDataFolder();
                 if (!dataFolder.exists()) {
-                    // noinspection ResultOfMethodCallIgnored
+
                     dataFolder.mkdirs();
                 }
                 ConfigurationSection sqlite = dbConfig.getConfigurationSection("sqlite");
                 String fileName = sqlite != null ? sqlite.getString("file", "disable-phantom.db") : "disable-phantom.db";
                 Path dbPath = dataFolder.toPath().resolve(fileName);
                 Files.createDirectories(dbPath.getParent());
-                // Load driver (often optional, but safe)
+
                 try {
                     Class.forName("org.sqlite.JDBC");
                 } catch (ClassNotFoundException ignored) {}
                 String url = "jdbc:sqlite:" + dbPath.toString();
                 this.connection = DriverManager.getConnection(url);
-                // pragma for better write performance with acceptable safety for this use-case
+                
                 try (Statement st = this.connection.createStatement()) {
                     st.execute("PRAGMA journal_mode = WAL;");
                     st.execute("PRAGMA synchronous = NORMAL;");
@@ -132,18 +126,13 @@ public class DatabaseManager {
         }
     }
 
-    /**
-     * Toggle the disabled flag for the given player.
-     * - Immediate state change reflected via in-memory cache.
-     * - Persisted asynchronously.
-     * @return new disabled state (true = phantoms disabled)
-     */
+
     public boolean togglePhantom(UUID uuid) {
         boolean current = isPhantomDisabled(uuid);
         boolean next = !current;
         cache.put(uuid, next);
 
-        // Async persist
+
         writer.submit(() -> {
             try {
                 if (rowExists(uuid)) {
@@ -163,9 +152,7 @@ public class DatabaseManager {
         return next;
     }
 
-    /**
-     * Fast, cached read. Falls back to DB on first lookup.
-     */
+
     public boolean isPhantomDisabled(UUID uuid) {
         Boolean cached = cache.get(uuid);
         if (cached != null) return cached;
@@ -211,4 +198,5 @@ public class DatabaseManager {
             try { st.close(); } catch (Exception ignored) {}
         }
     }
+
 }
